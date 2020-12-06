@@ -58,7 +58,7 @@ def Project_comments(request,pk):
 
 def registerPage(request):
 	if request.user.is_authenticated:
-		return redirect('home')
+		return redirect('index')
 	else:
 		form = StudentRegistrationForm()
 		if request.method == 'POST':
