@@ -10,3 +10,5 @@ urlpatterns = [
 	# path('<int:pk>/',views.Project_details, name='details'),
 	path('<int:pk>/comments/',views.Project_comments,name='comments')
 ]
+
+#test

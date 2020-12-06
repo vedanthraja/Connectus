@@ -1,5 +1,6 @@
 
 from django.shortcuts import render, redirect 
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
@@ -12,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from .models import *
-from .forms import CreateUserForm
+from .forms import CreateUserForm, StudentRegistrationForm
 # from .filters import OrderFilter
 def ProjList(request):
 	projs = Project.objects.all()
@@ -29,13 +30,17 @@ def registerPage(request):
 	if request.user.is_authenticated:
 		return redirect('home')
 	else:
-		form = CreateUserForm()
+		form = StudentRegistrationForm()
 		if request.method == 'POST':
-			form = CreateUserForm(request.POST)
+			form = StudentRegistrationForm(request.POST)
 			if form.is_valid():
+				
+				user1 = form.cleaned_data.get('username')
+				passw = form.cleaned_data.get('password1')
+				mail = form.cleaned_data.get('email')
+				user = User.objects.create_user(username=user1,email= mail,password=passw)
 				form.save()
-				user = form.cleaned_data.get('username')
-				messages.success(request, 'Account was created for ' + user)
+				messages.success(request, 'Account was created for ' + user1)
 
 				return redirect('login')
 			
@@ -65,6 +70,10 @@ def loginPage(request):
 def logoutUser(request):
 	logout(request)
 	return redirect('login')
+
+@login_required(login_url='login')
+def home(request):
+	return render(request, 'myapp/home.html', {})
 
 
 # @login_required(login_url='login')

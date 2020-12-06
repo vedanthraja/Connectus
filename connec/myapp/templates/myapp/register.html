@@ -75,7 +75,7 @@
 				</div>
 				<div class="d-flex justify-content-center form_container">
 
-					<form method="POST" action="">
+					<!-- <form method="POST" action="">
 						{% csrf_token %}
 						<div class="input-group mb-3">
 							<div class="input-group-append">
@@ -93,6 +93,12 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
+							{{form.institiute_name}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
 							{{form.password1}}
 						</div>
 						<div class="input-group mb-2">
@@ -101,6 +107,8 @@
 							</div>
 							{{form.password2}}
 						</div>
+						
+						
 
 
 
@@ -108,6 +116,10 @@
 				 			<input class="btn login_btn" type="submit" value="Register Account">
 				   		</div>
 
+					</form> -->
+					<form method="POST" class="post-form" autocomplete="off">{% csrf_token %}
+						{{ form.as_p }}    <!--render form as paragrah. Will wrap the form in <p> tags-->
+						<button type="submit" class="btn btn-default">Register</button>
 					</form>
 				</div>
 
@@ -131,7 +143,7 @@
 		form_fields[1].placeholder='Username..';
 		form_fields[2].placeholder='Email..';
 		form_fields[3].placeholder='Enter password...';
-		form_fields[4].placeholder='Re-enter Password...';
+		form_fields[4].placeholder='Institiute_name...';
 
 
 		for (var field in form_fields){	
