@@ -7,7 +7,7 @@ urlpatterns = [
 	path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
 	path('',views.ProjList, name = "index"),
-	# path('<int:pk>/',views.Project_details, name='details'),
+	path('<int:pk>/',views.Project_details, name='details'),
 	path('<int:pk>/comments/',views.Project_comments,name='comments')
 ]
 

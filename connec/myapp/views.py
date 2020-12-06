@@ -20,6 +20,28 @@ def ProjList(request):
 	context = {'projs':projs}
 	return render(request,'myapp/projects/projects.html',context)
 
+
+def Project_details(request,pk):
+	proj = Project.objects.get(pk=pk)
+	lat = proj.latitude
+	lon = proj.longitude
+	lat1=0
+	lon1=0
+	if(lat[-1]=='N'):
+		lat1=1
+	else:
+		lat1=-1
+	if(lon[-1]=='E'):
+		lon1=1
+	else:
+		lon1=-1
+	l1=len(lat)
+	l2=len(lat)
+	lat_num = float(lat[slice(l1-2)])*lat1
+	lon_num = float(lon[slice(l2-2)])*lon1
+	context = {'proj':proj,'lat_num':lat_num,'lon_num':lon_num}
+	return render(request, 'myapp/project-details/detail.html',context)
+
 def Project_comments(request,pk):
 	proj = Project.objects.get(pk=pk)
 	comments = Comment.objects.filter(proj=proj).order_by('-date')
