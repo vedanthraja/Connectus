@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from .models import *
-from .forms import CreateUserForm, StudentRegistrationForm
+from .forms import CreateUserForm, StudentRegistrationForm, CommentForm
 # from .filters import OrderFilter
 def ProjList(request):
 	projs = Project.objects.all()
@@ -23,7 +23,15 @@ def ProjList(request):
 def Project_comments(request,pk):
 	proj = Project.objects.get(pk=pk)
 	comments = Comment.objects.filter(proj=proj).order_by('-date')
-	context = {'comments':comments}
+	form = CommentForm()
+	context = {'comments':comments, 'form':form}
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comm_txt = form.cleaned_data.get('comm_txt')
+			commenter = request.user
+			com = Comment.objects.create(commenter=commenter,comm_txt=comm_txt,proj=proj)
+			com.save()
 	return render(request,'myapp/comments.html',context)
 
 def registerPage(request):

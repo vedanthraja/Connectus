@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import student
+from .models import student, Comment
 
 
 
@@ -24,3 +24,8 @@ class StudentRegistrationForm(ModelForm):
 		model = student
 		fields = ['username', 'email', 'password', 'institiute_name']
 		widgets = {'password' : forms.PasswordInput()}
+
+class CommentForm(ModelForm):
+	class Meta:
+		model = Comment
+		fields = ['comm_txt']

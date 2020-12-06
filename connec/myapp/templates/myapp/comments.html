@@ -288,6 +288,10 @@ body {
       </li>
       {% endfor %}
     </ul>
+    <form method="POST" class="post-form" autocomplete="off">{% csrf_token %}
+      {{ form.as_p }}    <!--render form as paragrah. Will wrap the form in <p> tags-->
+      <button type="submit" class="btn btn-primary">Post</button>
   </div>
+
 </body>
 </html>
