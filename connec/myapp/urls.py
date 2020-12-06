@@ -6,7 +6,9 @@ urlpatterns = [
     path('register/', views.registerPage, name="register"),
 	path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
-	path('home/', views.home, name = "home")
+	path('',views.ProjList, name = "index"),
+	# path('<int:pk>/',views.Project_details, name='details'),
+	path('<int:pk>/comments/',views.Project_comments,name='comments')
 ]
 
 #test

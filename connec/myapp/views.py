@@ -15,6 +15,16 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import CreateUserForm, StudentRegistrationForm
 # from .filters import OrderFilter
+def ProjList(request):
+	projs = Project.objects.all()
+	context = {'projs':projs}
+	return render(request,'myapp/projects/projects.html',context)
+
+def Project_comments(request,pk):
+	proj = Project.objects.get(pk=pk)
+	comments = Comment.objects.filter(proj=proj).order_by('-date')
+	context = {'comments':comments}
+	return render(request,'myapp/comments.html',context)
 
 def registerPage(request):
 	if request.user.is_authenticated:
@@ -41,7 +51,7 @@ def registerPage(request):
 
 def loginPage(request):
 	if request.user.is_authenticated:
-		return redirect('home')
+		return redirect('index')
 	else:
 		if request.method == 'POST':
 			username = request.POST.get('username')
@@ -51,7 +61,7 @@ def loginPage(request):
 
 			if user is not None:
 				login(request, user)
-				return redirect('home')
+				return redirect('index')
 			else:
 				messages.info(request, 'Username OR password is incorrect')
 
