@@ -36,9 +36,10 @@ def registerPage(request):
 			if form.is_valid():
 				
 				user1 = form.cleaned_data.get('username')
-				passw = form.cleaned_data.get('password1')
+				passw = form.cleaned_data.get('password')
 				mail = form.cleaned_data.get('email')
 				user = User.objects.create_user(username=user1,email= mail,password=passw)
+				user.save()
 				form.save()
 				messages.success(request, 'Account was created for ' + user1)
 
@@ -50,7 +51,7 @@ def registerPage(request):
 
 def loginPage(request):
 	if request.user.is_authenticated:
-		return redirect('home')
+		return redirect('index')
 	else:
 		if request.method == 'POST':
 			username = request.POST.get('username')
@@ -60,7 +61,7 @@ def loginPage(request):
 
 			if user is not None:
 				login(request, user)
-				return redirect('home')
+				return redirect('index')
 			else:
 				messages.info(request, 'Username OR password is incorrect')
 
