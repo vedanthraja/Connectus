@@ -21,6 +21,18 @@ def ProjList(request):
 	return render(request,'myapp/projects/projects.html',context)
 
 
+def apply(request, pk):
+	proj = Project.objects.get(pk=pk)
+	user = request.user
+	username = user.username
+	print(username)
+	stud = student.objects.get(username=username)
+	stud.projects.add(proj)
+
+	return redirect('home')
+
+
+
 def Project_details(request,pk):
 	proj = Project.objects.get(pk=pk)
 	lat = proj.latitude
@@ -39,7 +51,7 @@ def Project_details(request,pk):
 	l2=len(lat)
 	lat_num = float(lat[slice(l1-2)])*lat1
 	lon_num = float(lon[slice(l2-2)])*lon1
-	context = {'proj':proj,'lat_num':lat_num,'lon_num':lon_num}
+	context = {'proj':proj,'lat_num':lat_num,'lon_num':lon_num, 'id':proj.id}
 	return render(request, 'myapp/project-details/detail.html',context)
 
 def Project_comments(request,pk):
