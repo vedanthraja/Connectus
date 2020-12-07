@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
-
+from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import authenticate, login, logout
 
 from django.contrib import messages
@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from .models import *
-from .forms import CreateUserForm, StudentRegistrationForm, CommentForm
+from .forms import CreateUserForm, StudentRegistrationForm, CommentForm, ReportForm
 # from .filters import OrderFilter
 def ProjList(request):
 	projs = Project.objects.all()
@@ -114,6 +114,12 @@ def loginPage(request):
 def logoutUser(request):
 	logout(request)
 	return redirect('login')
+@login_required(login_url='login')
+def myProjects(request):
+	projs = Project.objects.filter(student = request.user)
+	username = request.user.username	
+	context = {'projs':projs,'username':username}
+	return render(request,'myapp/myprojects.html',context)
 
 
 @login_required(login_url='login')

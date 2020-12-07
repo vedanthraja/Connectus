@@ -10,7 +10,7 @@ urlpatterns = [
 	path('<int:pk>/apply/',views.apply, name="apply"),
 	path('<int:pk>/',views.Project_details, name='details'),
 	path('<int:pk>/comments/',views.Project_comments,name='comments'),
-	path('home/',views.home, name='home')
+	path('myprojects/',views.myProjects, name='myprojects')
 ]
 
 #test
