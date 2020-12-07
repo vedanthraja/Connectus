@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import student, Comment
+from .models import student, Comment, Report
 
 
 
@@ -29,3 +29,8 @@ class CommentForm(ModelForm):
 	class Meta:
 		model = Comment
 		fields = ['comm_txt']
+
+class ReportForm(forms.ModelForm):
+	class Meta:
+		model = Report
+		fields = ['file']

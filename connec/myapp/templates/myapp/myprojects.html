@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: powderblue;}
+h1   {color: blue;}
+p    {color: black;}
+
+/* generic */
+
+body {
+  background-color:#eee;
+  color:#444;
+  font-family:sans-serif;
+}
+h1{
+  color:#000;
+  text-align: center;
+}
+.list ul:nth-child(odd) {
+  background-color:#ddd;
+}
+
+.list ul:nth-child(even) {
+  background-color:#fff;
+}
+
+/* big */
+@media screen and (min-width:600px) {
+  
+  .list {
+    display:table;
+    margin:1em;
+  }
+ 
+  .list ul {
+    display:table-row;
+  }
+  
+  .list ul:first-child li {
+    background-color:#444;
+    color:#fff;
+  }
+  
+  .list ul > li {
+    display:table-cell;
+    padding:.5em 1em;
+  }
+  
+}
+
+/* small */
+@media screen and (max-width:599px) {
+  
+  .list ul {
+    border:solid 1px #ccc;
+    display:block;
+    list-style:none;
+    margin:1em;
+    padding:.5em 1em;
+  }
+  
+  .list ul:first-child {
+    display:none;
+  }
+  
+  .list ul > li {
+    display:block;
+    padding:.25em 0;
+  }
+  
+  .list ul:nth-child(odd) > li + li {
+    border-top:solid 1px #ccc;
+  }
+  
+  .list ul:nth-child(even) > li + li {
+    border-top:solid 1px #eee;
+  }
+  
+  .list ul > li:before {
+    color:#000;
+    content:attr(data-label);
+    display:inline-block;
+    font-size:75%;
+    font-weight:bold;
+    text-transform:capitalize;
+    vertical-align:top;
+    width:50%;
+  }
+  
+  .list p {
+    margin:-1em 0 0 50%;
+  }
+  
+}
+
+/* tiny */
+@media screen and (max-width:349px) {
+    
+  .list ul > li:before {
+    display:block;
+  }
+  
+  .list p {
+    margin:0;
+  }
+  
+}
+
+
+
+</style>
+</head>
+<body>
+<h1>{{username}}'s Projects</h1>
+<div class="list">
+  <ul>
+    <li>Title</li>
+    <li>Category</li>
+    <li>City</li>
+    <li>State</li>
+    <li>Date</li>
+    <li>Description</li>
+  </ul>
+  {% for proj in projs %}
+  <ul>
+    <li data-label="first name">{{proj.title}}</li>
+    <li data-label="last name">{{proj.category}}</li>
+    <li data-label="country">{{proj.city}}</li>
+    <li data-label="number">{{proj.state}}</li>
+    <li data-label="reference">{{proj.date}}</li>
+    <li data-label="description">
+      <p>{{proj.description}}</p>
+    </li>
+  </ul>
+  {% endfor %}
+</div>
+
+</body>
+</html>

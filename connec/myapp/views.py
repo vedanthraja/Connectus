@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
-
+from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import authenticate, login, logout
 
 from django.contrib import messages
@@ -13,13 +13,29 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from .models import *
-from .forms import CreateUserForm, StudentRegistrationForm, CommentForm
+from .forms import CreateUserForm, StudentRegistrationForm, CommentForm, ReportForm
 # from .filters import OrderFilter
 def ProjList(request):
 	projs = Project.objects.all()
 	context = {'projs':projs}
 	return render(request,'myapp/projects/projects.html',context)
 
+def myProjects(request):
+	projs = Project.objects.filter(student = request.user)
+	username = request.user.username	
+	context = {'projs':projs,'username':username}
+	return render(request,'myapp/myprojects.html',context)
+
+# def simple_upload(request,pk):
+#     if request.method == 'POST' and request.FILES['myfile']:
+#         myfile = request.FILES['myfile']
+#         fs = FileSystemStorage()
+#         filename = fs.save(myfile.name, myfile)
+#         uploaded_file_url = fs.url(filename)
+#         return render(request, 'core/simple_upload.html', {
+#             'uploaded_file_url': uploaded_file_url
+#         })
+#     return render(request, 'core/simple_upload.html')
 
 def Project_details(request,pk):
 	proj = Project.objects.get(pk=pk)

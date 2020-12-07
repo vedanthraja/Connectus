@@ -8,7 +8,8 @@ urlpatterns = [
 	path('logout/', views.logoutUser, name="logout"),
 	path('',views.ProjList, name = "index"),
 	path('<int:pk>/',views.Project_details, name='details'),
-	path('<int:pk>/comments/',views.Project_comments,name='comments')
+	path('<int:pk>/comments/',views.Project_comments,name='comments'),
+	path('myprojects/',views.myProjects, name='myprojects')
 ]
 
 #test
