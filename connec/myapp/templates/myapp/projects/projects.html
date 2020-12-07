@@ -3,7 +3,8 @@
   <head>
     <title>
     	Projects
-    </title>    
+    </title>
+    
     <link rel="stylesheet" type="text/css" href="projects.css">
     <style>
       /* Font */
@@ -126,11 +127,136 @@ img {
   margin-top: 35px;
   text-align: center;
 }
+
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+
+
+
+
+body {
+    margin: 0;
+    font-family: 'Nunito', 'sans-serif';
+    font-family: 'Raleway';
+    font-size: 18px;
+    background: rgb(245, 245, 245);
+    padding: 1em 0;
+
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background: rgb(5, 7, 110);
+    padding: 1em 0;
+}
+
+ header a {
+        color: white;
+        text-decoration: none;
+}
+header a.logo {
+        font-weight: bold;
+        font-size: 25px;        
+        font-family: 'Raleway';
+}
+
+header nav {
+        float: right;
+}
+header nav ul {
+            list-style-type: none;
+            margin: 0;
+            display: flex;
+}
+
+header nav ul li a {
+    padding: 1em;
+}
+.a:hover {
+    background: rgb(4, 4, 49);
+}
+
+.darken:hover {
+    background-color: rgb(6, 6, 61);
+}
+
+h1 {
+    margin-top: 2em;
+}
+
+.button {
+    width: fit-content;
+    height: 40px;
+    
+    border-radius: 5px;
+    box-shadow: rgb(7, 7, 58);
+    padding: 0;
+    position: relative;
+    bottom: 7px;
+    font-size: 20px;
+    margin: 0 10px 0 0;
+    padding: 0 10px;
+}
+
+.login {
+  background-color: rgb(0, 173, 196);
+  border-width: 2px;
+  border-color: rgb(162, 162, 182);
+  color: white;
+}
+
+.login:hover {
+    background-color: rgb(26, 72, 90);
+    color: rgb(255, 255, 255);
+}
+
+.register {
+  background-color: rgb(255, 117, 82);
+    border-width: 2px;
+    border-color: rgb(162, 162, 182);
+    border-radius: 5px;
+    box-shadow: rgb(7, 7, 58);
+    color: white;
+    
+}
+
+.register:hover {
+  background-color: rgb(145, 41, 0);
+    color: rgb(255, 255, 255);
+}
+
+.current {
+  font-weight: bold;
+  background-color: teal;
+}
+
+
+
+
     </style>
   </head>
   <body>
+    <header>
+        <div class="container">
+          <a href="#" class="logo">Trailblazers</a>
+          <nav>
+            <ul>
+              <li><a class="current" href="#" >Featured Projects</a></li>
+              <li><a class="darken" href="#" >My Projects</a></li>
+              <li><input class="button login" type="button" value="Login"></li>
+              <li><input class="button register" type="button" value="Register"></li>
+              
+            </ul>
+          </nav>
+        </div>
+      </header>
       <div class="main">
-        <h1 style="font-family:'segoe ui'; font-size: 50px; font-weight: bold;">Current Projects</h1>
+        <h1 style="font-family:'segoe ui'; font-size: 50px; font-weight: bold;">Featured Projects</h1>
         
         <ul class="cards">
           {% for proj in projs %}
@@ -140,7 +266,7 @@ img {
               <div class="card_content">
                 <h2 class="card_title">{{proj.title}}</h2>
                 <p class="card_text">{{proj.category}}</p>
-                <button class="btn card_btn"><a href="{{proj.id}}/">More Details</a></button>
+                <button class="btn card_btn"><a href="#">More Details</a></button>
               </div>
             </div>
           </li>
