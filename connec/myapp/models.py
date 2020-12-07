@@ -14,11 +14,11 @@ class Project(models.Model):
     latitude = models.CharField(max_length=100)
     longitude = models.CharField(max_length=100)
     collector = models.ForeignKey(User, on_delete = models.CASCADE, related_name ='collector')
-    student = models.ForeignKey(User, on_delete = models.CASCADE, related_name='student')
+    student = models.ForeignKey(User,null=True, on_delete = models.CASCADE, related_name='student')
     city = models.CharField(max_length = 100)
     state = models.CharField(max_length = 100)
     cover_img = models.ImageField(upload_to = "gallery")
-    report = models.ManyToManyField(Report)
+    report = models.ManyToManyField(Report, null=True)
 
     def __str__(self):
         return self.title
