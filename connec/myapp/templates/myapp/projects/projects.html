@@ -248,8 +248,8 @@ h1 {
             <ul>
               <li><a class="current" href="#" >Featured Projects</a></li>
               <li><a class="darken" href="#" >My Projects</a></li>
-              <li><input class="button login" type="button" value="Login"></li>
-              <li><input class="button register" type="button" value="Register"></li>
+              <li><a href="{% url 'login' %}"><input class="button login" type="button" value="Login"></a></li>
+              <li><a href="{% url 'register' %}"><input class="button register" type="button" value="Register"></a></li>
               
             </ul>
           </nav>
@@ -266,7 +266,7 @@ h1 {
               <div class="card_content">
                 <h2 class="card_title">{{proj.title}}</h2>
                 <p class="card_text">{{proj.category}}</p>
-                <button class="btn card_btn"><a href="#">More Details</a></button>
+                <button class="btn card_btn"><a href="{{proj.id}}/">More Details</a></button>
               </div>
             </div>
           </li>

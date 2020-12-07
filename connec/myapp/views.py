@@ -20,7 +20,7 @@ def ProjList(request):
 	context = {'projs':projs}
 	return render(request,'myapp/projects/projects.html',context)
 
-
+@login_required(login_url='login')
 def apply(request, pk):
 	proj = Project.objects.get(pk=pk)
 	user = request.user
@@ -32,7 +32,7 @@ def apply(request, pk):
 	return redirect('home')
 
 
-
+@login_required(login_url='login')
 def Project_details(request,pk):
 	proj = Project.objects.get(pk=pk)
 	lat = proj.latitude
@@ -53,7 +53,7 @@ def Project_details(request,pk):
 	lon_num = float(lon[slice(l2-2)])*lon1
 	context = {'proj':proj,'lat_num':lat_num,'lon_num':lon_num, 'id':proj.id}
 	return render(request, 'myapp/project-details/detail.html',context)
-
+@login_required(login_url='login')
 def Project_comments(request,pk):
 	proj = Project.objects.get(pk=pk)
 	comments = Comment.objects.filter(proj=proj).order_by('-date')
@@ -110,6 +110,7 @@ def loginPage(request):
 		context = {}
 		return render(request, 'myapp/login.html', context)
 
+@login_required(login_url='login')
 def logoutUser(request):
 	logout(request)
 	return redirect('login')
